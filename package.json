@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "python -m SimpleHTTPServer",
     "format": "standard --fix",
     "test": "standard --verbose"
   },

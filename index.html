@@ -24,9 +24,6 @@
         #btn {
           font-size: 1.4em;
         }
-        #info {
-          display: none;
-        }
     </style>
 </head>
 
@@ -38,7 +35,7 @@
 <article>
     <input type="text" value="" placeholder="http://..." id="imageUrl">
     <input type="button" value="Analyze" id="btn">
-    <pre id="info">See3PO is reading this...</pre>
+    <pre id="info"></pre>
     <div id="imageHolder"></div>
 </article>
 
@@ -46,12 +43,24 @@
 <script>
 var $input = $('#imageUrl')
 function clickHandler(e) {
-  $('#info').show()
+  $('#info').text('See3PO is looking...')
   $('#imageHolder').html('<img src="'+ $input.val() +'"/>')
 
   var url = 'https://see3po.azurewebsites.net/api/HttpTriggerJS1?url=' + $input.val() + '&code=tempkey'
-  $.get(url, function( data ) {
+
+  function success ( data ) {
     $('#info').text( JSON.stringify(data, null, '\t'));
+  }
+
+  function error ( xhr, status, error ) {
+    $('#info').text( status +' '+ error );
+  }
+
+  $.ajax({
+    url: url,
+    success: success,
+    error: error,
+    dataType: 'json'
   });
 }
 $('#btn').on('click', clickHandler)
