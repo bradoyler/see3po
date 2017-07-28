@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "standard --fix",
+    "test": "standard --verbose"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "microsoft-computer-vision": "^0.3.2"
+  },
+  "devDependencies": {
+    "standard": "^10.0.2"
   }
 }
