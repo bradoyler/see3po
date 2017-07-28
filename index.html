@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>See3PO</title>
+    <style>
+        body {
+            margin: 30px;
+            background-color: #eee;
+        }
+        h1 {
+            font-weight:bold;
+            font-size:2.5em;
+            text-transform:capitalize;
+            letter-spacing: 0.1em;
+        }
+        a:link, a:visited {
+            color:#6d6e73;
+        }
+        a:hover, a:focus, a:active {
+            color:#444;
+        }
+        p {
+            margin: 5px;
+        }
+        #imageUrl {
+          font-size: 1.4em;
+        }
+        #btn {
+          font-size: 1.4em;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1>See-3PO</h1>
+</header>
+
+<article>
+    <input type="text" value="" placeholder="http://..." id="imageUrl">
+    <input type="button" value="Analyze" id="btn">
+    <h3 id="info"></h3>
+</article>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+var $input = $('#imageUrl')
+function clickHandler(e) {
+  var url = 'https://see3po.azurewebsites.net/api/HttpTriggerJS1?url=' + $input.val() + '&code=tempkey'
+  $.get(url, function( data ) {
+    $('#info').html( JSON.stringify(data));
+  });
+}
+$('#btn').on('click', clickHandler)
+</script>
+</body>
+</html>
