@@ -9,12 +9,6 @@
             margin: 30px;
             background-color: #eee;
         }
-        h1 {
-            font-weight:bold;
-            font-size:2.5em;
-            text-transform:capitalize;
-            letter-spacing: 0.1em;
-        }
         a:link, a:visited {
             color:#6d6e73;
         }
@@ -30,6 +24,9 @@
         #btn {
           font-size: 1.4em;
         }
+        #info {
+          display: none;
+        }
     </style>
 </head>
 
@@ -41,16 +38,20 @@
 <article>
     <input type="text" value="" placeholder="http://..." id="imageUrl">
     <input type="button" value="Analyze" id="btn">
-    <h3 id="info"></h3>
+    <pre id="info">See3PO is reading this...</pre>
+    <div id="imageHolder"></div>
 </article>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script>
 var $input = $('#imageUrl')
 function clickHandler(e) {
+  $('#info').show()
+  $('#imageHolder').html('<img src="'+ $input.val() +'"/>')
+
   var url = 'https://see3po.azurewebsites.net/api/HttpTriggerJS1?url=' + $input.val() + '&code=tempkey'
   $.get(url, function( data ) {
-    $('#info').html( JSON.stringify(data));
+    $('#info').text( JSON.stringify(data, null, '\t'));
   });
 }
 $('#btn').on('click', clickHandler)
