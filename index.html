@@ -82,7 +82,7 @@ console.log(loadUrl, '>>>');
 $input.val(loadUrl)
 function clickHandler(e) {
   $('#info').text('See3PO is reading...')
-  $('#imageHolder').html('<img src="'+ $input.val() +'"/>')
+  $('#imageHolder').html('<img "img-responsive" src="'+ $input.val() +'"/>')
 
   var url = 'https://see3po.azurewebsites.net/api/HttpTriggerJS1?url=' + $input.val() + '&code=tempkey'
 
