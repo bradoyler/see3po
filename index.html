@@ -1,49 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset=utf-8>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>See3PO</title>
-    <style>
-        body {
-            margin: 30px;
-            background-color: #eee;
-        }
-        a:link, a:visited {
-            color:#6d6e73;
-        }
-        a:hover, a:focus, a:active {
-            color:#444;
-        }
-        p {
-            margin: 5px;
-        }
-        #imageUrl {
-          font-size: 1.4em;
-        }
-        #btn {
-          font-size: 1.4em;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css" />
 </head>
-
 <body>
-<header>
-    <h1>See-3PO</h1>
-</header>
+  <style>
+      body {
+          background-image: url('/images/see3po.png');
+          margin: 30px;
+          background-repeat: no-repeat;
+          background-color: #fff;
+      }
+      a:link, a:visited {
+          color:#6d6e73;
+      }
+      a:hover, a:focus, a:active {
+          color:#444;
+      }
+      p {
+          margin: 5px;
+      }
+      #imageUrl {
+        font-size: 1.4em;
+      }
+      #btn {
+        font-size: 1.4em;
+      }
+      pre {
+        background-color: #000;
+        color: #ccc;
+        min-height: 100px;
+      }
+  </style>
+<div class="container">
+  <nav class="navbar navbar-default">
+    <a class="navbar-brand" href="#">See3PO</a>
+  </nav>
 
-<article>
-    <input type="text" value="" placeholder="http://..." id="imageUrl">
-    <input type="button" value="Analyze" id="btn">
-    <pre id="info"></pre>
+  <article>
+    <pre id="info">$ welcome! <br> 
+      enter an image URL below <br>
+      and click 'Analyze'
+    </pre>
+    <!-- <img class="img-circle" src="https://img.bricklink.com/ItemImage/ML/sw561.png" alt="c3po"> -->
+    <form>
+      <div class="form-group">
+        <input id="imageUrl" type="url" class="form-control" placeholder="image URL goes here...">
+      </div>
+      <button id="btn" type="button" class="btn btn-default">Analyze</button>
+    </form>
+    <hr>
     <div id="imageHolder"></div>
-</article>
-
+  </article>
+</div>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script>
+var search = document.location.search || ''
+var loadUrl = search.split('?load=')[1]
+
 var $input = $('#imageUrl')
+console.log(loadUrl, '>>>');
+$input.val(loadUrl)
 function clickHandler(e) {
-  $('#info').text('See3PO is looking...')
+  $('#info').text('See3PO is reading...')
   $('#imageHolder').html('<img src="'+ $input.val() +'"/>')
 
   var url = 'https://see3po.azurewebsites.net/api/HttpTriggerJS1?url=' + $input.val() + '&code=tempkey'
