@@ -19,7 +19,8 @@ module.exports = function (context, req) {
   context.log('JavaScript HTTP trigger function processed a request.', req.query)
   const { url } = req.query
   if (url) {
-    seeImageUrl(url, function (err, data) {
+    const _url = url.replace('https://','http://');
+    seeImageUrl(_url, function (err, data) {
       const errorMsg = `${url} , Error:${err}`
       const bodyJson = { url, data }
       context.res = {
